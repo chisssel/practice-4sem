@@ -29,11 +29,10 @@ func ConnectDB() {
 
 	fmt.Println("Database connection successfully opened")
 
-	// Автоматические миграции
 	err = DB.AutoMigrate(
 		&models.Counters{},
 		&models.TypeCounter{},
-		// добавьте другие модели
+		// можно будет добавить все остальные модели
 	)
 	if err != nil {
 		log.Fatal("Failed to migrate database")

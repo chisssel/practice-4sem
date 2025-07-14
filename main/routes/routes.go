@@ -17,7 +17,7 @@ func SetupRoutes() *gin.Engine {
 	api := r.Group("/api")
 	{
 		api.GET("/counters", counterController.GetCounters)
-		// Добавьте другие маршруты
+		// возможно, надо будет дополнить еще маршрутами
 	}
 
 	return r
