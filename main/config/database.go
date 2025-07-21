@@ -38,3 +38,12 @@ func ConnectDB() {
 		log.Fatal("Failed to migrate database")
 	}
 }
+
+func BuildDSN() string {
+	return "host=" + os.Getenv("DB_HOST") +
+		" user=" + os.Getenv("DB_USER") +
+		" password=" + os.Getenv("DB_PASSWORD") +
+		" dbname=" + os.Getenv("DB_NAME") +
+		" port=" + os.Getenv("DB_PORT") +
+		" sslmode=disable TimeZone=UTC"
+}

@@ -1,23 +1,40 @@
 package routes
 
 import (
-	"practice-4sem/config"
-	"practice-4sem/controllers"
-
 	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
+	"practice-4sem/controllers"
+	"practice-4sem/repositories"
 )
 
-func SetupRoutes() *gin.Engine {
+//func SetupRoutes() *gin.Engine {
+//	r := gin.Default()
+//
+//	db := config.DB
+//
+//	counterController := controllers.NewCounterController(db)
+//	itemRepo := repositories.NewItemRepository(db)
+//	itemController := controllers.NewItemController(itemRepo)
+//
+//	api := r.Group("/api")
+//	{
+//		api.GET("/counters", counterController.GetCounters)
+//		api.GET("/items", itemController.GetItems)
+//		// возможно, надо будет дополнить еще маршрутами
+//	}
+//
+//	return r
+//}
+
+func SetupRoutes(db *gorm.DB) *gin.Engine {
 	r := gin.Default()
 
-	db := config.DB
+	itemRepo := repositories.NewItemRepository(db)
+	itemController := controllers.NewItemController(itemRepo)
 
-	counterController := controllers.NewCounterController(db)
-
-	api := r.Group("/api")
+	api := r.Group("/api/v1")
 	{
-		api.GET("/counters", counterController.GetCounters)
-		// возможно, надо будет дополнить еще маршрутами
+		api.GET("/items", itemController.GetItems)
 	}
 
 	return r
